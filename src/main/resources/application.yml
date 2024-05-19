@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
@@ -14,3 +16,8 @@ spring:
     properties:
       hibernate.default_batch_fetch_size: 1000
       format_sql: true
+    batch:
+      jdbc:
+        initialize-schema: always # 자동생성 설정
+      job:
+        enabled: false

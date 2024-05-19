@@ -1,23 +1,23 @@
-package springbatch_inflearn.configuration;
+package springbatch_inflearn.configuration.JobConfiguration;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.transaction.PlatformTransactionManager;
 
 
 @Slf4j
-@Configuration
 @RequiredArgsConstructor
 public class HelloJobConfiguration {
 
@@ -37,22 +37,19 @@ public class HelloJobConfiguration {
      * 이를 방지하기 위해서는 다음 방법이 있다.
      * RepeatStatus.FINISHED = 한번만 실행하고 종료
      */
-    @Bean
     public Step helloStep1() {
         return new StepBuilder("helloStep1",jobRepository)
                 .tasklet(myTasklet1(),platformTransactionManager)
                 .build();
     }
 
-    @Bean
     public Step helloStep2() {
         return new StepBuilder("helloStep2",jobRepository)
                 .tasklet(myTasklet2(),platformTransactionManager)
                 .build();
     }
 
-    @Bean
-    public Tasklet myTasklet1() {
+    private Tasklet myTasklet1() {
         return (((contribution, chunkContext) -> {
             log.info("=======================");
             log.info(">>> Hello Spring Batch!");
@@ -61,8 +58,7 @@ public class HelloJobConfiguration {
         }));
     }
 
-    @Bean
-    public Tasklet myTasklet2() {
+    private Tasklet myTasklet2() {
         return (((contribution, chunkContext) -> {
             log.info("=======================");
             log.info(">>> Hello Spring Batch2!");
