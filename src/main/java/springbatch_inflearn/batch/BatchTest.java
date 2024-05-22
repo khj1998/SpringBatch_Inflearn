@@ -1,4 +1,4 @@
-package springbatch_inflearn.job_parameter;
+package springbatch_inflearn.batch;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
