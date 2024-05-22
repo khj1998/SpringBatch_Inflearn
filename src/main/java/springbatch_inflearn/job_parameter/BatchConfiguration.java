@@ -72,6 +72,8 @@ public class BatchConfiguration {
             log.info("step 1 has been executed");
             return RepeatStatus.FINISHED;
         });
+
+                
     }
 
     private Tasklet tasklet2() {

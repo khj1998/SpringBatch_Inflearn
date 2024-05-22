@@ -21,6 +21,6 @@ public class JobRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        jobLauncher.run(job,jobParameters);
+        //jobLauncher.run(job,jobParameters);
     }
 }
