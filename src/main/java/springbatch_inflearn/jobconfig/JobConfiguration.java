@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.flow.Flow;
@@ -15,6 +16,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+import springbatch_inflearn.validationconfig.CustomJobParametersValidator;
 
 @Slf4j
 @Configuration
@@ -36,14 +38,14 @@ public class JobConfiguration {
                 .build();
     }
 
-    @Bean
+    /*@Bean
     public Job job2() {
-        return new JobBuilder("repository_test",jobRepository)
+        return new JobBuilder("repository_test2",jobRepository)
                 .start(flow())
                 .next(step5())
                 .end()
                 .build();
-    }
+    }*/
 
     private Flow flow() {
         FlowBuilder<Flow> flowBuilder = new FlowBuilder<>("flow");
