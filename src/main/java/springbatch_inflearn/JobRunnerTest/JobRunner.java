@@ -14,6 +14,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * 스프링에서 Job 자동 실행 옵션을 off 하고 직접 run하는 클래스.
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor

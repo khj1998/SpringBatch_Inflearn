@@ -9,6 +9,7 @@ import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.flow.Flow;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -16,6 +17,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
+import springbatch_inflearn.Incrementer.CustomJobParametersIncrementer;
 import springbatch_inflearn.validationconfig.CustomJobParametersValidator;
 
 @Slf4j
@@ -35,6 +37,9 @@ public class JobConfiguration {
                 .start(step())
                 .next(step2())
                 .listener(jobExecutionListener)
+                .incrementer(new CustomJobParametersIncrementer())
+                //.incrementer(new RunIdIncrementer()) // 스프링에서 제공하는 파라미터 id 증가 클래스.
+                //.preventRestart()
                 .build();
     }
 
