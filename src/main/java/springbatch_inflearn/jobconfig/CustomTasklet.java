@@ -9,7 +9,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 @Slf4j
 public class CustomTasklet implements Tasklet {
     @Override
-    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
         String stepName = contribution.getStepExecution().getStepName();
         String jobName = chunkContext.getStepContext().getJobName();
 
