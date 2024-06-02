@@ -63,17 +63,20 @@ public class JobConfiguration {
     private Step step() {
         return new StepBuilder("start-step",jobRepository)
                 .tasklet(tasklet(),platformTransactionManager)
+                .allowStartIfComplete(true)
                 .build();
     }
 
     private Step step2() {
         return new StepBuilder("step2",jobRepository)
                 .tasklet(tasklet2(),platformTransactionManager)
+                .startLimit(3)
                 .build();
     }
 
     private Step step3() {
         return new StepBuilder("start-step",jobRepository)
+                //.tasklet(new CustomTasklet(),platformTransactionManager)
                 .tasklet(tasklet(),platformTransactionManager)
                 .build();
     }
@@ -101,7 +104,8 @@ public class JobConfiguration {
     private Tasklet tasklet2() {
         return ((contribution, chunkContext) -> {
             log.info("step2 - tasklet2 수행");
-            return RepeatStatus.FINISHED;
+            throw new RuntimeException("step2 failed!");
+            //return RepeatStatus.FINISHED;
         });
     }
 
